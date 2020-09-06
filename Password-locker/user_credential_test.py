@@ -68,3 +68,65 @@ class TestCredentials(unittest.TestCase):
 		self.assertEqual(self.new_credential.account_name,'maryjoe')
 		self.assertEqual(self.new_credential.password,'pswd100')
     
+    def test_save_credentials(self):
+		'''
+		Test to check if the new credential info is saved into the credentials list
+		'''
+		self.new_credential.save_credentials()
+		twitter = Credential('Jane','Twitter','maryjoe','pswd100')
+		twitter.save_credentials()
+		self.assertEqual(len(Credential.credentials_list),2)
+
+	# def test_generate_password(self):
+	# 	'''
+	# 	Test to check if the generate password generates 8 character long alphanumeric numbers
+	# 	'''
+	# 	self.twitter = Credential('Twitter','maryjoe','')
+	# 	self.twitter.password = generate_password()
+	# 	self.assertEqual()
+
+	def tearDown(self):
+		'''
+		Function to clear the credentials list after every test
+		'''
+		Credential.credentials_list = []
+		User.users_list = []
+
+	def test_display_credentials(self):
+		'''
+		Test to check if the display_credentials method, displays the correct credentials.
+		'''
+		self.new_credential.save_credentials()
+		twitter = Credential('Jane','Twitter','maryjoe','pswd100')
+		twitter.save_credentials()
+		gmail = Credential('Jane','Gmail','maryjoe','pswd200')
+		gmail.save_credentials()
+		self.assertEqual(len(Credential.display_credentials(twitter.user_name)),2)
+
+	def test_find_by_site_name(self):
+		'''
+		Test to check if the find_by_site_name method returns the correct credential
+		'''
+		self.new_credential.save_credentials()
+		twitter = Credential('Jane','Twitter','maryjoe','pswd100')
+		twitter.save_credentials()
+		credential_exists = Credential.find_by_site_name('Twitter')
+		self.assertEqual(credential_exists,twitter)
+
+	def test_copy_credential(self):
+		'''
+		Test to check if the copy a credential method copies the correct credential
+		'''
+		self.new_credential.save_credentials()
+		twitter = Credential('Jane','Twitter','maryjoe','pswd100')
+		twitter.save_credentials()
+		find_credential = None
+		for credential in Credential.user_credentials_list:
+				find_credential =Credential.find_by_site_name(credential.site_name)
+				return pyperclip.copy(find_credential.password)
+		Credential.copy_credential(self.new_credential.site_name)
+		self.assertEqual('pswd100',pyperclip.paste())
+		print(pyperclip.paste())
+
+if __name__ == '__main__':
+	unittest.main(verbosity=2)
