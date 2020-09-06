@@ -2,6 +2,7 @@ import unittest
 import pyperclip
 from user_credentials import User, Credential
 
+
 class TestUser(unittest.TestCase):
 	'''
 	Test class that defines test cases for the user class behaviours.
@@ -9,19 +10,20 @@ class TestUser(unittest.TestCase):
 	Args:
 	    unittest.TestCase: helps in creating test cases
 	'''
+
 	def setUp(self):
 		'''
 		Function to create a user account before each test
 		'''
-		self.new_user = User('Mary','Ng\'ang\'a','pswd100')
+		self.new_user = User('Teddie', 'Machoka, 'admin')
 
     def test__init__(self):
 		'''
 		Test to if check the initialization/creation of user instances is properly done
 		'''
-		self.assertEqual(self.new_user.first_name,'Mary')
-		self.assertEqual(self.new_user.last_name,'Ng\'ang\'a')
-		self.assertEqual(self.new_user.password,'pswd100')
+		self.assertEqual(self.new_user.first_name,'Teddie')
+		self.assertEqual(self.new_user.last_name,'Machoka')
+		self.assertEqual(self.new_user.password,'admin')
 
 	def test_save_user(self):
 		'''
@@ -41,9 +43,9 @@ class TestCredentials(unittest.TestCase):
 		'''
 		Function to test whether the login in function check_user works as expected
 		'''
-		self.new_user = User('Mary','Ng\'ang\'a','pswd100')
+		self.new_user = User('Teddie','Machoka','admin')
 		self.new_user.save_user()
-		user2 = User('Ken','Ng\'ang\'a','pswd100')
+		user2 = User('Ted','Ted,'pswd100')
 		user2.save_user()
 
 		for user in User.users_list:
@@ -57,16 +59,16 @@ class TestCredentials(unittest.TestCase):
 		'''
 		Function to create an account's credentials before each test
 		'''
-		self.new_credential = Credential('Mary','Facebook','maryjoe','pswd100')
+		self.new_credential = Credential('Teddie','Facebook','teddieted','admin')
 
 	def test__init__(self):
 		'''
 		Test to if check the initialization/creation of credential instances is properly done
 		'''
-		self.assertEqual(self.new_credential.user_name,'Mary')
+		self.assertEqual(self.new_credential.user_name,'Teddie')
 		self.assertEqual(self.new_credential.site_name,'Facebook')
-		self.assertEqual(self.new_credential.account_name,'maryjoe')
-		self.assertEqual(self.new_credential.password,'pswd100')
+		self.assertEqual(self.new_credential.account_name,'teddieted')
+		self.assertEqual(self.new_credential.password,'admin')
     
     def test_save_credentials(self):
 		'''
