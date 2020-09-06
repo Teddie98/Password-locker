@@ -55,7 +55,7 @@ def copy_credential(site_name):
 	return Credential.copy_credential(site_name)
 
 
-    def main():
+def main():
 	print(' ')
 	print('Hello! Welcome to Password Locker.')
 	while True:
@@ -65,7 +65,7 @@ def copy_credential(site_name):
 		short_code = input('Enter a choice: ').lower().strip()
 		if short_code == 'ex':
 			break
-        elif short_code == 'ca':
+         elif short_code == 'ca':
 			print("-"*60)
 			print(' ')
 			print('To create a new account:')
@@ -121,3 +121,41 @@ def copy_credential(site_name):
 						print(' ')
 						print(f'Credential Created: Site Name: {site_name} - Account Name: {account_name} - Password: {password}')
 						print(' ')
+
+                elif short_code == 'dc':
+						print(' ')
+						if display_credentials(user_name):
+							print('Here is a list of all your credentials')
+							print(' ')
+							for credential in display_credentials(user_name):
+								print(f'Site Name: {credential.site_name} - Account Name: {credential.account_name} - Password: {credential.password}')
+							print(' ')	
+						else:
+							print(' ')
+							print("You don't seem to have any credentials saved yet")
+							print(' ')
+					elif short_code == 'copy':
+						print(' ')
+						chosen_site = input('Enter the site name for the credential password to copy: ')
+						copy_credential(chosen_site)
+						print('')
+					else:
+						print('Oops! Wrong option entered. Try again.')
+
+			else: 
+				print(' ')
+				print('Oops! Wrong details entered. Try again or Create an Account.')		
+		
+		else:
+			print("-"*60)
+			print(' ')
+			print('Oops! Wrong option entered. Try again.')
+				
+
+
+
+
+
+
+if __name__ == '__main__':
+	main()
